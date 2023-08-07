@@ -1,2 +1,15 @@
 # TopDag
-A library targeting .NET Standard implementing a basic Directed Acyclic Graph. In addition to algorithms for checking path existence, cycle detection, and topologocal sorting, provides extensibility hooks for traversing the DAG and performing arbitrary operations at each node/edge visit (with cumulative state). Based on [ociaw's Dagger](https://github.com/ociaw/dagger).
+A library targeting .NET Standard implementing a basic Directed Acyclic Graph. 
+
+## Features
+* Check for path existence
+* Cycle detection
+* Topological sorting
+* Satisfiability graph
+* Extensible -- inherit/override existing classes as you see fit
+
+## Goals
+* Provide algorithm for graph traversal with arbitrary operations at each node/edge visit (with cumulative state).
+* Examples
+
+Based on [ociaw's Dagger](https://github.com/ociaw/dagger).
