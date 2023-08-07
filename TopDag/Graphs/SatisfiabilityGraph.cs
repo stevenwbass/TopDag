@@ -4,6 +4,7 @@ namespace TopDag.Graphs
 {
     /// <summary>
     /// For use with a user-provided class that extends <see cref="Nodes.SatisfiabilityNode"/>.<br />
+    /// Will throw exceptions if <typeparamref name="TData"/> cannot be cast to <see cref="SatisfiabilityNode"/>! This is by design.<br />
     /// <br />
     /// Given a DAG with nodes that can evaluate whether they are "satisfied", the SatisfiabilityGraph can find paths through the DAG<br />
     /// that are completely satisfied (all nodes return true from <see cref="Nodes.SatisfiabilityNode.IsSatisfied"/>).<br />
@@ -13,7 +14,7 @@ namespace TopDag.Graphs
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    public class SatisfiabilityGraph<TKey, TData> : AbstractDag<TKey, TData> where TData : SatisfiabilityNode
+    public class SatisfiabilityGraph<TKey, TData> : Dag<TKey, TData> where TData : class
     {
         public SatisfiabilityGraph()
         { }
@@ -66,7 +67,7 @@ namespace TopDag.Graphs
             // find sat-paths in the layers
             var satPaths = new List<List<TKey>>();
 
-            var rootNodes = satNodeKeys.Where(key => !this.IncomingEdges[key].Any());
+            var rootNodes = satNodeKeys.Where(key => !this.IncomingEdges.ContainsKey(key) || !this.IncomingEdges[key].Any());
 
             foreach(var rootNode in rootNodes)
             {
@@ -99,7 +100,9 @@ namespace TopDag.Graphs
                 {
                     if (!anyNextNodes)
                     {
-                        satPathsForRootNode.Add(pathStack.ToList());
+                        var satPath = pathStack.ToList();
+                        satPath.Reverse(); // so that sat-paths can be traced through the graph without reading them backwards
+                        satPathsForRootNode.Add(satPath);
                     }
                     var childNode = pathStack.Pop();
                     var parentNode = pathStack.Count > 0 ? pathStack.Peek() : default;
@@ -133,7 +136,7 @@ namespace TopDag.Graphs
                 // first-layer nodes have no outgoing edges and get a free pass to get sat-checked
                 !this.OutgoingEdges[key].Any())
             {
-                if (this[key].IsSatisfied())
+                if ((this[key] as SatisfiabilityNode).IsSatisfied())
                 {
                     satNodeKeys.Add(key);
                 }
@@ -144,11 +147,21 @@ namespace TopDag.Graphs
         {
             foreach (var detachedKey in detached)
             {
-                if (this[detachedKey].IsSatisfied())
+                if ((this[detachedKey] as SatisfiabilityNode).IsSatisfied())
                 {
                     result.Add(new TKey[1] { detachedKey });
                 }
             }
+        }
+
+        private SatisfiabilityNode GetSatNodeForKey(TKey key)
+        {
+            var satNode = this[key] as SatisfiabilityNode;
+
+            if (satNode == null)
+                throw new InvalidCastException($"{nameof(TKey)} must extend {nameof(SatisfiabilityNode)}!");
+
+            return satNode;
         }
     }
 }

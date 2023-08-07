@@ -13,7 +13,7 @@ namespace TopDag.Graphs
         /// points to a node that has not been added to the graph is considered detached.
         /// </summary>
         /// <returns>A tuple containing a list of layers and a list of detached keys.</returns>
-        public static (List<List<TKey>> layers, List<TKey> detached) TopologicalSort<TKey, TData>(AbstractDag<TKey, TData> graph)
+        public static (List<List<TKey>> layers, List<TKey> detached) TopologicalSort<TKey, TData>(Dag<TKey, TData> graph)
         {
             // This method could probably be optimized significantly.
             // Now that I know it's called a topological sort, could use Kahn's algorithm.

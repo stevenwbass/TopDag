@@ -50,6 +50,6 @@ namespace TopDag.Graphs
         /// <summary>
         /// Creates a shallow copy of the graph, referencing the same keys and data as the original.
         /// </summary>
-        public void ShallowCopy(AbstractDag<TKey, TData> target);
+        public void ShallowCopy(Dag<TKey, TData> target);
     }
 }
