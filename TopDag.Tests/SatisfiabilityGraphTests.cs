@@ -13,15 +13,9 @@ namespace TopDag.Tests
         public class DumbSatNode : SatisfiabilityNode
         {
             private int _val;
-            public DumbSatNode(int satWhen1) 
-            {
-                _val = satWhen1;
-            }
+            public DumbSatNode(int satWhen1) => _val = satWhen1;
 
-            public override bool IsSatisfied()
-            {
-                return _val == 1;
-            }
+            public override bool IsSatisfied() => _val == 1;
         }
 
         /// <summary>
@@ -32,10 +26,7 @@ namespace TopDag.Tests
         {
             
             [TestInitialize]
-            public new void Initialize()
-            {
-                Graph = new SatisfiabilityGraph<int, object>();
-            }
+            public new void Initialize() => Graph = new SatisfiabilityGraph<int, object>();
         }
 
         public class SatGraphBase
@@ -43,10 +34,7 @@ namespace TopDag.Tests
             public SatisfiabilityGraph<string, DumbSatNode> Graph;
 
             [TestInitialize]
-            public void Initialize()
-            {
-                Graph = new SatisfiabilityGraph<string, DumbSatNode>();
-            }
+            public void Initialize() => Graph = new SatisfiabilityGraph<string, DumbSatNode>();
 
             public void CheckSatPath(string[] expected, List<string[]> satPaths)
             {
