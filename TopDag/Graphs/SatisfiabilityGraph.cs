@@ -1,4 +1,7 @@
-﻿using TopDag.Graphs.Nodes;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TopDag.Graphs.Nodes;
 
 namespace TopDag.Graphs
 {
@@ -77,7 +80,7 @@ namespace TopDag.Graphs
             return satPaths;
         }
 
-        private List<List<TKey>> FindSatPathsForRootNode(TKey? rootNode, HashSet<TKey> satNodeKeys)
+        private List<List<TKey>> FindSatPathsForRootNode(TKey rootNode, HashSet<TKey> satNodeKeys)
         {
             // this should never happen, but handle it gracefully just in case
             if (rootNode == null) return new List<List<TKey>>();
@@ -119,7 +122,7 @@ namespace TopDag.Graphs
             return satPathsForRootNode;
         }
 
-        private (bool, TKey?) GetNextSatNode(HashSet<TKey> satNodeKeys, Dictionary<TKey, List<TKey>> visitedChildNodes, TKey? currentNode)
+        private (bool, TKey) GetNextSatNode(HashSet<TKey> satNodeKeys, Dictionary<TKey, List<TKey>> visitedChildNodes, TKey currentNode)
         {
             var anyNextNodes = this.OutgoingEdges[currentNode].Any();
             var outGoingEdgesToIgnore = visitedChildNodes.ContainsKey(currentNode) ? visitedChildNodes[currentNode] : new List<TKey>();
@@ -129,7 +132,7 @@ namespace TopDag.Graphs
             return (anyNextNodes, nextSatNode);
         }
 
-        private void AddKeyIfSat(HashSet<TKey> satNodeKeys, TKey? key)
+        private void AddKeyIfSat(HashSet<TKey> satNodeKeys, TKey key)
         {
             // a node in any layer (except the first) must have at last one outgoing edge to a satisfied node to be part of a sat-path
             if (this.OutgoingEdges[key].Any(childNodeKey => satNodeKeys.Contains(childNodeKey)) ||

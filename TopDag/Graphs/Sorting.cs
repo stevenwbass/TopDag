@@ -1,4 +1,8 @@
-﻿/*
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+/*
  * Mostly copied from ociaw's Dagger.
  * Changed to a static, parameterized method to accomodate arbitrary graph types (provided they extend AbstractDag).
  */

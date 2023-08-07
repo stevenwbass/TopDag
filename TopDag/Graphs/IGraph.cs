@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
 
 namespace TopDag.Graphs
 {
@@ -7,49 +7,49 @@ namespace TopDag.Graphs
         /// <summary>
         /// Adds a node with the specified key, data, and outgoing edges to the graph.
         /// </summary>
-        public void AddNode(TKey key, TData data, IList<TKey> outgoing);
+        void AddNode(TKey key, TData data, IList<TKey> outgoing);
 
         /// <summary>
         /// Checks if adding the node causes a cycle.
         /// </summary>
-        public bool CausesCycle(TKey key, IList<TKey> outgoing);
+        bool CausesCycle(TKey key, IList<TKey> outgoing);
 
         /// <summary>
         /// Removes all nodes that are not reachable from any of the given nodes.
         /// </summary>
         /// <param name="topKeys">Keys to keep.</param>
-        public void Trim(IEnumerable<TKey> topKeys);
+        void Trim(IEnumerable<TKey> topKeys);
 
         /// <summary>
         /// Removes a node and its outgoing edges.
         /// </summary>
         /// <param name="key"></param>
-        public void RemoveNode(TKey key);
+        void RemoveNode(TKey key);
 
         /// <summary>
         /// Checks if a path exists between the given start and end nodes.
         /// </summary>
-        public bool PathExists(TKey start, TKey end);
+        bool PathExists(TKey start, TKey end);
 
         /// <summary>
         /// Checks if the graph contains a node with the given key.
         /// </summary>
         /// <param name="key"></param>
-        public bool Contains(TKey key);
+        bool Contains(TKey key);
 
         /// <summary>
         /// Gets the incoming edges to a key, regardless if the node has been added or not.
         /// </summary>
-        public List<TKey> GetIncoming(TKey key);
+        List<TKey> GetIncoming(TKey key);
 
         /// <summary>
         /// Gets the incoming eges to a key, regardless if the node has been added or not.
         /// </summary>
-        public List<TKey> GetOutgoing(TKey key);
+        List<TKey> GetOutgoing(TKey key);
 
         /// <summary>
         /// Creates a shallow copy of the graph, referencing the same keys and data as the original.
         /// </summary>
-        public void ShallowCopy(Dag<TKey, TData> target);
+        void ShallowCopy(Dag<TKey, TData> target);
     }
 }

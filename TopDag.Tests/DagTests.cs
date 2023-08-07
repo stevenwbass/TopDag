@@ -28,8 +28,8 @@ namespace TopDag.Tests
 
             var (layers, detached) = Sorting.TopologicalSort(Graph);
 
-            Assert.AreEqual(4, layers.Count);
-            Assert.AreEqual(0, detached.Count);
+            Assert.AreEqual(4, layers.Count());
+            Assert.AreEqual(0, detached.Count());
             Assert.AreEqual(16, Graph[layers[0][0]]);
             Assert.AreEqual(4, Graph[layers[1][0]]);
             Assert.AreEqual(9, Graph[layers[2][0]]);
@@ -69,8 +69,8 @@ namespace TopDag.Tests
             var incoming = Graph.GetIncoming(1);
             var outgoing = Graph.GetOutgoing(0);
 
-            Assert.AreEqual(1, layers.Count);
-            Assert.AreEqual(0, detached.Count);
+            Assert.AreEqual(1, layers.Count());
+            Assert.AreEqual(0, detached.Count());
             Assert.AreEqual(4, layers[0].Count);
             Assert.AreEqual(0, incoming.Count);
             Assert.AreEqual(0, outgoing.Count);
@@ -110,8 +110,8 @@ namespace TopDag.Tests
 
             var (layers, detached) = Sorting.TopologicalSort(Graph);
 
-            Assert.AreEqual(3, layers.Count);
-            Assert.AreEqual(2, detached.Count);
+            Assert.AreEqual(3, layers.Count());
+            Assert.AreEqual(2, detached.Count());
         }
 
         [TestMethod]
@@ -124,8 +124,8 @@ namespace TopDag.Tests
 
             var (layers, detached) = Sorting.TopologicalSort(Graph);
 
-            Assert.AreEqual(0, layers.Count);
-            Assert.AreEqual(4, detached.Count);
+            Assert.AreEqual(0, layers.Count());
+            Assert.AreEqual(4, detached.Count());
         }
 
         [TestMethod]
@@ -144,10 +144,10 @@ namespace TopDag.Tests
             var (layers, detached) = Sorting.TopologicalSort(clone);
 
             Assert.AreEqual(4, Graph.Count);
-            Assert.AreEqual(4, originalLayers.Count);
-            Assert.AreEqual(3, clone.Count);
-            Assert.AreEqual(3, layers.Count);
-            Assert.AreEqual(0, detached.Count);
+            Assert.AreEqual(4, originalLayers.Count());
+            Assert.AreEqual(3, clone.Count());
+            Assert.AreEqual(3, layers.Count());
+            Assert.AreEqual(0, detached.Count());
             Assert.ThrowsException<ArgumentNullException>(() => clone.Trim(null));
             Assert.ThrowsException<ArgumentException>(() => clone.RemoveNode(100));
         }
