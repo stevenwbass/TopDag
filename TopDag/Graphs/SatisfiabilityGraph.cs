@@ -22,6 +22,11 @@ namespace TopDag.Graphs
         public SatisfiabilityGraph()
         { }
 
+        /// <summary>
+        /// Determines if there exists any fully satisfied path through the graph.<br />
+        /// A path is considered "fully satisfied" if it passes through only satisfied nodes.
+        /// </summary>
+        /// <returns><see cref="bool"/></returns>
         public bool IsSatisfied()
         {
             return FindSatisfiedPaths().Any();
