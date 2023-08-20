@@ -2,7 +2,7 @@
 
 namespace TopDag.Graphs
 {
-    public interface IGraph<TKey, TData> : IEnumerable<KeyValuePair<TKey, TData>>
+    public interface IGraph<TKey, TData>
     {
         /// <summary>
         /// Adds a node with the specified key, data, and outgoing edges to the graph.

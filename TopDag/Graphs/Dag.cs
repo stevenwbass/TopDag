@@ -23,10 +23,6 @@ namespace TopDag.Graphs
 
         public virtual TData this[TKey key] => Data[key];
 
-        public virtual IEnumerator<KeyValuePair<TKey, TData>> GetEnumerator() => Data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         public virtual void ShallowCopy(Dag<TKey, TData> target)
         {
             target.Data = new Dictionary<TKey, TData>(this.Data);

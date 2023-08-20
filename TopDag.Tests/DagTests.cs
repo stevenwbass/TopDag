@@ -11,7 +11,7 @@ namespace TopDag.Tests
         /// <summary>
         /// TData is an object to allow other test classes to extend this one, ensuring all base cases are covered by inheriting classes when relevant.
         /// </summary>
-        protected Dag<int, object> Graph;
+        protected Dag<int, object> Graph = new Dag<int, object>();
         
         [TestInitialize] public void Initialize() 
         {
@@ -145,7 +145,7 @@ namespace TopDag.Tests
 
             Assert.AreEqual(4, Graph.Count);
             Assert.AreEqual(4, originalLayers.Count());
-            Assert.AreEqual(3, clone.Count());
+            Assert.AreEqual(3, clone.Count);
             Assert.AreEqual(3, layers.Count());
             Assert.AreEqual(0, detached.Count());
             Assert.ThrowsException<ArgumentNullException>(() => clone.Trim(null));
