@@ -1,5 +1,5 @@
 # TopDag
-An extensible library for Directed Acyclic Graphs multi-targeting .NET Standard and .NET 6.
+An extensible library for Directed Acyclic Graphs multi-targeting .NET Standard (2.0 for ultimate compatability) and .NET 6.
 
 ### Features
 * Check for path existence
